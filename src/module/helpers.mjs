@@ -1,4 +1,4 @@
-import { MODULE_ID, MyFlags, MySettings } from './constants';
+import { MODULE_ID, MyFlags, MySettings } from './constants.mjs';
 
 export function log(force: boolean, ...args) {
   //@ts-ignore

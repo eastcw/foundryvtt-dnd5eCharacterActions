@@ -1,18 +1,6 @@
-import { getActivationType, getGame, isItemInActionList, log } from './helpers';
+import { getActivationType, getGame, isItemInActionList, log } from './helpers.mjs';
 
-enum ItemTypeSortValues {
-  weapon = 1,
-  equipment = 2,
-  feat = 3,
-  spell = 4,
-  consumable = 5,
-  tool = 6,
-  backpack = 7,
-  class = 8,
-  loot = 9,
-}
-
-export function getActorActionsData(actor: Actor5e) {
+export function getActorActionsData(actor) {
   const filteredItems = actor.items
     .filter(isItemInActionList)
     .sort((a, b) => {
@@ -45,11 +33,8 @@ export function getActorActionsData(actor: Actor5e) {
       return item;
     });
 
-  const actionsData: Record<
-    'action' | 'bonus' | 'crew' | 'lair' | 'legendary' | 'reaction' | 'other',
-    Set<Item5e>
-  > = filteredItems.reduce(
-    (acc, item: Item5e) => {
+  const actionsData = filteredItems.reduce(
+    (acc, item) => {
       try {
         log(false, 'digesting item', {
           item,
@@ -70,13 +55,13 @@ export function getActorActionsData(actor: Actor5e) {
       }
     },
     {
-      action: new Set<Item5e>(),
-      bonus: new Set<Item5e>(),
-      crew: new Set<Item5e>(),
-      lair: new Set<Item5e>(),
-      legendary: new Set<Item5e>(),
-      reaction: new Set<Item5e>(),
-      other: new Set<Item5e>(),
+      action: new Set(),
+      bonus: new Set(),
+      crew: new Set(),
+      lair: new Set(),
+      legendary: new Set(),
+      reaction: new Set(),
+      other: new Set(),
     },
   );
 

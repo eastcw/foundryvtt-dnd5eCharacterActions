@@ -1,9 +1,9 @@
-import { MODULE_ABBREV, MODULE_ID, MyFlags } from './constants';
-import { getGame, isItemInActionList, log } from './helpers';
+import { MODULE_ABBREV, MODULE_ID, MyFlags } from './constants.mjs';
+import { getGame, isItemInActionList, log } from './helpers.mjs';
 
 export function addFavoriteControls(
   app: FormApplication & {
-    object: Actor5e;
+    object: Actor5e,
   },
   html: JQuery,
 ) {
