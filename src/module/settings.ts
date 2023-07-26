@@ -1,5 +1,5 @@
-import { MySettings, MODULE_ID, MODULE_ABBREV } from './constants.mjs';
-import { getGame } from './helpers.mjs';
+import { MySettings, MODULE_ID, MODULE_ABBREV } from './constants';
+import { getGame } from './helpers';
 
 export const registerSettings = function () {
   // Register any custom module settings here

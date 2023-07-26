@@ -1,10 +1,10 @@
-import { registerSettings } from './settings.mjs';
-import { MODULE_ABBREV, MODULE_ID, MySettings, TEMPLATES } from './constants.mjs';
-import { getGame, isItemInActionList, log } from './helpers.mjs';
-import { getActorActionsData } from './getActorActionsData.mjs';
-import { addFavoriteControls } from './handleFavoriteControls.mjs';
+import { registerSettings } from './settings';
+import { MODULE_ABBREV, MODULE_ID, MySettings, TEMPLATES } from './constants';
+import { getGame, isItemInActionList, log } from './helpers';
+import { getActorActionsData } from './getActorActionsData';
+import { addFavoriteControls } from './handleFavoriteControls';
 
-Handlebars.registerHelper(`${MODULE_ABBREV}-isEmpty`, (input) => {
+Handlebars.registerHelper(`${MODULE_ABBREV}-isEmpty`, (input: Object | Array<any> | Set<any>) => {
   if (input instanceof Array) {
     return input.length < 1;
   }
@@ -19,7 +19,11 @@ Handlebars.registerHelper(`${MODULE_ABBREV}-isItemInActionList`, isItemInActionL
 /**
  * Add the Actions Tab to Sheet HTML. Returns early if the character-actions-dnd5e element already exists
  */
-async function addActionsTab(app, html, data) {
+async function addActionsTab(
+  app: ActorSheet5e,
+  html,
+  data: ReturnType<ActorSheet5e['getData']> extends Promise<infer T> ? T : ReturnType<ActorSheet5e['getData']>,
+) {
   if (data instanceof Promise) {
     log(true, 'data was unexpectedly a Promise, you might be using an unsupported sheet');
     return;
@@ -83,7 +87,12 @@ const damageTypeIconMap = {
 /**
  * Renders the html of the actions list for the provided actor data
  */
-async function renderActionsList(actorData, options) {
+async function renderActionsList(
+  actorData: Actor5e,
+  options?: {
+    rollIcon?: string;
+  },
+) {
   const actionData = getActorActionsData(actorData);
 
   log(false, 'renderActionsList', {
@@ -158,13 +167,13 @@ Hooks.on('renderActorSheet5e', async (app, html, data) => {
   // short circut if the user has overwritten these settings
   switch (app.actor.type) {
     case 'npc':
-      const injectNPCSheet = getGame().settings.get(MODULE_ID, MySettings.injectNPCs);
+      const injectNPCSheet = getGame().settings.get(MODULE_ID, MySettings.injectNPCs) as boolean;
       if (!injectNPCSheet) return;
     case 'vehicle':
-      const injectVehicleSheet = getGame().settings.get(MODULE_ID, MySettings.injectVehicles);
+      const injectVehicleSheet = getGame().settings.get(MODULE_ID, MySettings.injectVehicles) as boolean;
       if (!injectVehicleSheet) return;
     case 'character':
-      const injectCharacterSheet = getGame().settings.get(MODULE_ID, MySettings.injectCharacters);
+      const injectCharacterSheet = getGame().settings.get(MODULE_ID, MySettings.injectCharacters) as boolean;
       if (!injectCharacterSheet) return;
   }
 
