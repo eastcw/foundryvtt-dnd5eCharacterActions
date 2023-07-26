@@ -51,53 +51,49 @@ export function isItemInActionList(item) {
 
   // perform normal filtering logic
   switch (item.type) {
-    case 'weapon':
-      {
-        return item.system.equipped;
-      }
-    case 'equipment':
-      {
-        return item.system.equipped && isActiveItem(item.system.activation?.type);
-      }
-    case 'consumable':
-      {
-        return !!getGame().settings.get(MODULE_ID, MySettings.includeConsumables) && isActiveItem(item.system.activation?.type);
-      }
-    case 'spell':
-      {
-        const limitToCantrips = getGame().settings.get(MODULE_ID, MySettings.limitActionsToCantrips);
+    case 'weapon': {
+      return item.system.equipped;
+    }
+    case 'equipment': {
+      return item.system.equipped && isActiveItem(item.system.activation?.type);
+    }
+    case 'consumable': {
+      return (
+        !!getGame().settings.get(MODULE_ID, MySettings.includeConsumables) && isActiveItem(item.system.activation?.type)
+      );
+    }
+    case 'spell': {
+      const limitToCantrips = getGame().settings.get(MODULE_ID, MySettings.limitActionsToCantrips);
 
-        // only exclude spells which need to be prepared but aren't
-        const notPrepared = item.system.preparation?.mode === 'prepared' && !item.system.preparation?.prepared;
-        const isCantrip = item.system.level === 0;
-        if (!isCantrip && (limitToCantrips || notPrepared)) {
-          return false;
-        }
-        const isReaction = item.system.activation?.type === 'reaction';
-        const isBonusAction = item.system.activation?.type === 'bonus';
-
-        //ASSUMPTION: If the spell causes damage, it will have damageParts
-        const isDamageDealer = item.system.damage?.parts?.length > 0;
-        let shouldInclude = isReaction || isBonusAction || isDamageDealer;
-        if (getGame().settings.get(MODULE_ID, MySettings.includeOneMinuteSpells)) {
-          const isOneMinuter = item.system?.duration?.units === 'minute' && item.system?.duration?.value === 1;
-          const isOneRounder = item.system?.duration?.units === 'round' && item.system?.duration?.value === 1;
-          shouldInclude = shouldInclude || isOneMinuter || isOneRounder;
-        }
-        if (getGame().settings.get(MODULE_ID, MySettings.includeSpellsWithEffects)) {
-          const hasEffects = !!item.effects.size;
-          shouldInclude = shouldInclude || hasEffects;
-        }
-        return shouldInclude;
-      }
-    case 'feat':
-      {
-        return !!item.system.activation?.type;
-      }
-    default:
-      {
+      // only exclude spells which need to be prepared but aren't
+      const notPrepared = item.system.preparation?.mode === 'prepared' && !item.system.preparation?.prepared;
+      const isCantrip = item.system.level === 0;
+      if (!isCantrip && (limitToCantrips || notPrepared)) {
         return false;
       }
+      const isReaction = item.system.activation?.type === 'reaction';
+      const isBonusAction = item.system.activation?.type === 'bonus';
+
+      //ASSUMPTION: If the spell causes damage, it will have damageParts
+      const isDamageDealer = item.system.damage?.parts?.length > 0;
+      let shouldInclude = isReaction || isBonusAction || isDamageDealer;
+      if (getGame().settings.get(MODULE_ID, MySettings.includeOneMinuteSpells)) {
+        const isOneMinuter = item.system?.duration?.units === 'minute' && item.system?.duration?.value === 1;
+        const isOneRounder = item.system?.duration?.units === 'round' && item.system?.duration?.value === 1;
+        shouldInclude = shouldInclude || isOneMinuter || isOneRounder;
+      }
+      if (getGame().settings.get(MODULE_ID, MySettings.includeSpellsWithEffects)) {
+        const hasEffects = !!item.effects.size;
+        shouldInclude = shouldInclude || hasEffects;
+      }
+      return shouldInclude;
+    }
+    case 'feat': {
+      return !!item.system.activation?.type;
+    }
+    default: {
+      return false;
+    }
   }
 }
 export function getGame() {

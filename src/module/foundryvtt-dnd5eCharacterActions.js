@@ -1,9 +1,10 @@
+/* eslint-disable no-case-declarations */
 import { registerSettings } from './settings';
 import { MODULE_ABBREV, MODULE_ID, MySettings, TEMPLATES } from './constants';
 import { getGame, isItemInActionList, log } from './helpers';
 import { getActorActionsData } from './getActorActionsData';
 import { addFavoriteControls } from './handleFavoriteControls';
-Handlebars.registerHelper(`${MODULE_ABBREV}-isEmpty`, input => {
+Handlebars.registerHelper(`${MODULE_ABBREV}-isEmpty`, (input) => {
   if (input instanceof Array) {
     return input.length < 1;
   }
@@ -25,12 +26,14 @@ async function addActionsTab(app, html, data) {
   const existingActionsList = $(html).find('.character-actions-dnd5e');
 
   // check if what is rendering this is an Application and if our Actions List exists within it already
-  if (!!app.appId && !!existingActionsList.length || app.options.blockActionsTab) {
+  if ((!!app.appId && !!existingActionsList.length) || app.options.blockActionsTab) {
     return;
   }
 
   // Update the nav menu
-  const actionsTabButton = $('<a class="item" data-tab="actions">' + getGame().i18n.localize(`DND5E.ActionPl`) + '</a>');
+  const actionsTabButton = $(
+    '<a class="item" data-tab="actions">' + getGame().i18n.localize(`DND5E.ActionPl`) + '</a>'
+  );
   const tabs = html.find('.tabs[data-group="primary"]');
   tabs.prepend(actionsTabButton);
 
@@ -44,14 +47,14 @@ async function addActionsTab(app, html, data) {
   actionsTab.append(actionsTabHtml);
 
   // @ts-ignore
-  actionsTabHtml.find('.item .item-name.rollable h4').click(event => app._onItemSummary(event));
+  actionsTabHtml.find('.item .item-name.rollable h4').click((event) => app._onItemSummary(event));
 
   // owner only listeners
   if (data.owner) {
     // @ts-ignore
-    actionsTabHtml.find('.item .item-image').click(event => app._onItemUse(event));
+    actionsTabHtml.find('.item .item-image').click((event) => app._onItemUse(event));
     // @ts-ignore
-    actionsTabHtml.find('.item .item-recharge').click(event => app._onItemRecharge(event));
+    actionsTabHtml.find('.item .item-recharge').click((event) => app._onItemRecharge(event));
   } else {
     actionsTabHtml.find('.rollable').each((i, el) => el.classList.remove('rollable'));
   }
@@ -71,7 +74,7 @@ const damageTypeIconMap = {
   slashing: '<i class="fas fa-cut"></i>',
   thunder: '<i class="fas fa-wind"></i>',
   healing: '<i class="fas fa-heart"></i>',
-  temphp: '<i class="fas fa-shield-alt"></i>'
+  temphp: '<i class="fas fa-shield-alt"></i>',
 };
 
 /**
@@ -81,22 +84,22 @@ async function renderActionsList(actorData, options) {
   const actionData = getActorActionsData(actorData);
   log(false, 'renderActionsList', {
     actorData,
-    data: actionData
+    data: actionData,
   });
   return renderTemplate(`modules/${MODULE_ID}/templates/actor-actions-list.hbs`, {
     actionData,
     abilities: getGame().dnd5e.config.abilityAbbreviations,
     activationTypes: {
       ...getGame().dnd5e.config.abilityActivationTypes,
-      other: getGame().i18n.localize(`DND5E.ActionOther`)
+      other: getGame().i18n.localize(`DND5E.ActionOther`),
     },
     damageTypes: {
       ...getGame().dnd5e.config.damageTypes,
-      ...getGame().dnd5e.config.healingTypes
+      ...getGame().dnd5e.config.healingTypes,
     },
     damageTypeIconMap,
     rollIcon: options?.rollIcon,
-    isOwner: actorData.isOwner
+    isOwner: actorData.isOwner,
   });
 }
 
@@ -116,21 +119,29 @@ Hooks.once('init', async function () {
     characterActionsModuleData.api = {
       getActorActionsData,
       isItemInActionList,
-      renderActionsList
+      renderActionsList,
     };
   }
   globalThis[MODULE_ABBREV] = {
     renderActionsList: async function (...args) {
       log(false, {
-        api: characterActionsModuleData?.api
+        api: characterActionsModuleData?.api,
       });
-      console.warn(MODULE_ID, '|', 'accessing the module api on globalThis is deprecated and will be removed in a future update, check if there is an update to your sheet module');
+      console.warn(
+        MODULE_ID,
+        '|',
+        'accessing the module api on globalThis is deprecated and will be removed in a future update, check if there is an update to your sheet module'
+      );
       return characterActionsModuleData?.api?.renderActionsList(...args);
     },
     isItemInActionList: function (...args) {
-      console.warn(MODULE_ID, '|', 'accessing the module api on globalThis is deprecated and will be removed in a future update, check if there is an update to your sheet module');
+      console.warn(
+        MODULE_ID,
+        '|',
+        'accessing the module api on globalThis is deprecated and will be removed in a future update, check if there is an update to your sheet module'
+      );
       return characterActionsModuleData?.api?.isItemInActionList(...args);
-    }
+    },
   };
   Hooks.call(`CharacterActions5eReady`, characterActionsModuleData?.api);
 });
@@ -142,9 +153,11 @@ Hooks.on('renderActorSheet5e', async (app, html, data) => {
     case 'npc':
       const injectNPCSheet = getGame().settings.get(MODULE_ID, MySettings.injectNPCs);
       if (!injectNPCSheet) return;
+    //falls through
     case 'vehicle':
       const injectVehicleSheet = getGame().settings.get(MODULE_ID, MySettings.injectVehicles);
       if (!injectVehicleSheet) return;
+    //falls through
     case 'character':
       const injectCharacterSheet = getGame().settings.get(MODULE_ID, MySettings.injectCharacters);
       if (!injectCharacterSheet) return;
@@ -152,19 +165,17 @@ Hooks.on('renderActorSheet5e', async (app, html, data) => {
   log(false, 'default sheet open hook firing', {
     app,
     html,
-    data
+    data,
   });
   const actionsList = $(html).find('.character-actions-dnd5e');
   log(false, 'actionsListExists', {
-    actionsListExists: actionsList.length
+    actionsListExists: actionsList.length,
   });
   if (!actionsList.length) {
     await addActionsTab(app, html, data);
   }
   addFavoriteControls(app, html);
 });
-Hooks.once('devModeReady', ({
-  registerPackageDebugFlag
-}) => {
+Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {
   registerPackageDebugFlag(MODULE_ID);
 });

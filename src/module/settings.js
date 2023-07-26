@@ -8,7 +8,7 @@ export const registerSettings = function () {
     type: Boolean,
     scope: 'client',
     config: true,
-    hint: `${MODULE_ABBREV}.settings.limitActionsToCantrips.Hint`
+    hint: `${MODULE_ABBREV}.settings.limitActionsToCantrips.Hint`,
   });
   getGame().settings.register(MODULE_ID, MySettings.includeOneMinuteSpells, {
     name: `${MODULE_ABBREV}.settings.includeOneMinuteSpells.Label`,
@@ -16,7 +16,7 @@ export const registerSettings = function () {
     type: Boolean,
     scope: 'client',
     config: true,
-    hint: `${MODULE_ABBREV}.settings.includeOneMinuteSpells.Hint`
+    hint: `${MODULE_ABBREV}.settings.includeOneMinuteSpells.Hint`,
   });
   getGame().settings.register(MODULE_ID, MySettings.includeSpellsWithEffects, {
     name: `${MODULE_ABBREV}.settings.includeSpellsWithEffects.Label`,
@@ -24,7 +24,7 @@ export const registerSettings = function () {
     type: Boolean,
     scope: 'client',
     config: true,
-    hint: `${MODULE_ABBREV}.settings.includeSpellsWithEffects.Hint`
+    hint: `${MODULE_ABBREV}.settings.includeSpellsWithEffects.Hint`,
   });
   getGame().settings.register(MODULE_ID, MySettings.includeConsumables, {
     name: `${MODULE_ABBREV}.settings.includeConsumables.Label`,
@@ -32,7 +32,7 @@ export const registerSettings = function () {
     type: Boolean,
     scope: 'client',
     config: true,
-    hint: `${MODULE_ABBREV}.settings.includeConsumables.Hint`
+    hint: `${MODULE_ABBREV}.settings.includeConsumables.Hint`,
   });
   getGame().settings.register(MODULE_ID, MySettings.injectCharacters, {
     name: `${MODULE_ABBREV}.settings.injectCharacters.Label`,
@@ -40,7 +40,7 @@ export const registerSettings = function () {
     type: Boolean,
     scope: 'client',
     config: true,
-    hint: `${MODULE_ABBREV}.settings.injectCharacters.Hint`
+    hint: `${MODULE_ABBREV}.settings.injectCharacters.Hint`,
   });
   getGame().settings.register(MODULE_ID, MySettings.injectNPCs, {
     name: `${MODULE_ABBREV}.settings.injectNPCs.Label`,
@@ -48,7 +48,7 @@ export const registerSettings = function () {
     type: Boolean,
     scope: 'world',
     config: true,
-    hint: `${MODULE_ABBREV}.settings.injectNPCs.Hint`
+    hint: `${MODULE_ABBREV}.settings.injectNPCs.Hint`,
   });
   getGame().settings.register(MODULE_ID, MySettings.injectVehicles, {
     name: `${MODULE_ABBREV}.settings.injectVehicles.Label`,
@@ -56,6 +56,6 @@ export const registerSettings = function () {
     type: Boolean,
     scope: 'world',
     config: true,
-    hint: `${MODULE_ABBREV}.settings.injectVehicles.Hint`
+    hint: `${MODULE_ABBREV}.settings.injectVehicles.Hint`,
   });
 };

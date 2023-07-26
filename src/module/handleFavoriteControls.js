@@ -2,19 +2,27 @@ import { MODULE_ABBREV, MODULE_ID, MyFlags } from './constants';
 import { getGame, isItemInActionList, log } from './helpers';
 export function addFavoriteControls(app, html) {
   function createFavButton(filterOverride) {
-    return `<a class="item-control item-action-filter-override ${filterOverride ? 'active' : ''}" title="${filterOverride ? getGame().i18n.localize(`${MODULE_ABBREV}.button.setOverrideFalse`) : getGame().i18n.localize(`${MODULE_ABBREV}.button.setOverrideTrue`)}">
+    return `<a class="item-control item-action-filter-override ${filterOverride ? 'active' : ''}" title="${
+      filterOverride
+        ? getGame().i18n.localize(`${MODULE_ABBREV}.button.setOverrideFalse`)
+        : getGame().i18n.localize(`${MODULE_ABBREV}.button.setOverrideTrue`)
+    }">
       <i class="fas fa-fist-raised">
         <i class="fas fa-slash"></i>
         <i class="fas fa-plus"></i>
       </i>
-      <span class="control-label">${filterOverride ? getGame().i18n.localize(`${MODULE_ABBREV}.button.setOverrideFalse`) : getGame().i18n.localize(`${MODULE_ABBREV}.button.setOverrideTrue`)}</span>
+      <span class="control-label">${
+        filterOverride
+          ? getGame().i18n.localize(`${MODULE_ABBREV}.button.setOverrideFalse`)
+          : getGame().i18n.localize(`${MODULE_ABBREV}.button.setOverrideTrue`)
+      }</span>
     </a>`;
   }
 
   // add button to toggle favourite of the item in their native tab
   if (app.options.editable) {
     // Handle Click on our action
-    $(html).on('click', 'a.item-action-filter-override', e => {
+    $(html).on('click', 'a.item-action-filter-override', (e) => {
       try {
         const closestItemLi = $(e.target).parents('[data-item-id]')[0]; // BRITTLE
         const itemId = closestItemLi.dataset.itemId;
@@ -30,7 +38,7 @@ export function addFavoriteControls(app, html) {
           closestItemLi,
           itemId,
           relevantItem,
-          currentFilter
+          currentFilter,
         });
       } catch (e) {
         log(true, 'Error trying to set flag on item', e);

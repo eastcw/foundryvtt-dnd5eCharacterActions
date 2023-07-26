@@ -1,31 +1,34 @@
-module.exports = {
-  parser: '@typescript-eslint/parser',
+// SPDX-FileCopyrightText: 2022 Johannes Loher
+// SPDX-FileCopyrightText: 2022 David Archibald
+//
+// SPDX-License-Identifier: MIT
 
+module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
+    extraFileExtensions: ['.cjs', '.mjs'],
     sourceType: 'module',
   },
 
   env: {
     browser: true,
+    es6: true,
+    jquery: true,
   },
 
-  extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
+  extends: ['eslint:recommended', '@typhonjs-fvtt/eslint-config-foundry.js/0.8.0', 'plugin:prettier/recommended'],
 
-  plugins: ['@typescript-eslint'],
+  plugins: [],
 
   rules: {
     // Specify any specific ESLint rules.
-    '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/ban-types': 'warn',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
 
   overrides: [
     {
-      files: ['./*.js'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off',
+      files: ['./*.js', './*.cjs', './*.mjs'],
+      env: {
+        node: true,
       },
     },
   ],
