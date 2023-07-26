@@ -1,6 +1,6 @@
 import { MODULE_ID, MyFlags, MySettings } from './constants.mjs';
 
-export function log(force: boolean, ...args) {
+export function log(force, ...args) {
   //@ts-ignore
   const shouldLog = force || game.modules.get('_dev-mode')?.api?.getPackageDebugValue(MODULE_ID);
 
@@ -9,7 +9,7 @@ export function log(force: boolean, ...args) {
   }
 }
 
-export function getActivationType(activationType?: DND5e.AbilityActivationType) {
+export function getActivationType(activationType) {
   switch (activationType) {
     case 'action':
     case 'bonus':
@@ -24,7 +24,7 @@ export function getActivationType(activationType?: DND5e.AbilityActivationType) 
   }
 }
 
-export function isActiveItem(activationType?: string) {
+export function isActiveItem(activationType) {
   if (!activationType) {
     return false;
   }
@@ -34,13 +34,13 @@ export function isActiveItem(activationType?: string) {
   return true;
 }
 
-export function isItemInActionList(item: Item5e) {
+export function isItemInActionList(item) {
   // log(false, 'filtering item', {
   //   item,
   // });
 
   // check our override
-  const override = item.getFlag(MODULE_ID, MyFlags.filterOverride) as boolean | undefined;
+  const override = item.getFlag(MODULE_ID, MyFlags.filterOverride);
 
   if (override !== undefined) {
     return override;
@@ -112,7 +112,7 @@ export function isItemInActionList(item: Item5e) {
   }
 }
 
-export function getGame(): Game {
+export function getGame() {
   if (!(game instanceof Game)) {
     throw new Error('game is not initialized yet!');
   }

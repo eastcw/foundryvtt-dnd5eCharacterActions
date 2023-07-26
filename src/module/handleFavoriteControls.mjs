@@ -1,13 +1,8 @@
 import { MODULE_ABBREV, MODULE_ID, MyFlags } from './constants.mjs';
 import { getGame, isItemInActionList, log } from './helpers.mjs';
 
-export function addFavoriteControls(
-  app: FormApplication & {
-    object: Actor5e,
-  },
-  html: JQuery,
-) {
-  function createFavButton(filterOverride: boolean) {
+export function addFavoriteControls(app, html) {
+  function createFavButton(filterOverride) {
     return `<a class="item-control item-action-filter-override ${filterOverride ? 'active' : ''}" title="${
       filterOverride
         ? getGame().i18n.localize(`${MODULE_ABBREV}.button.setOverrideFalse`)
@@ -55,7 +50,7 @@ export function addFavoriteControls(
     });
 
     // Add button to all item rows
-    html.find('[data-item-id]').each((_index, element: HTMLElement) => {
+    html.find('[data-item-id]').each((_index, element) => {
       const itemId = element.dataset.itemId;
       const relevantItem = itemId && app.object.items.get(itemId);
 
