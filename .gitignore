@@ -5,6 +5,7 @@
 # Node Modules
 node_modules/
 npm-debug.log
+tools/node_modules/
 
 # yarn2
 .yarn/*
