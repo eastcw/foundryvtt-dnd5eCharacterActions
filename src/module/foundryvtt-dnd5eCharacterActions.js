@@ -122,6 +122,7 @@ Hooks.once('init', async function () {
       renderActionsList,
     };
   }
+  // eslint-disable-next-line no-undef
   globalThis[MODULE_ABBREV] = {
     renderActionsList: async function (...args) {
       log(false, {

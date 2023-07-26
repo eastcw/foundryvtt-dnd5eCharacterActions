@@ -3,7 +3,6 @@
   "title": "Character Actions List dnd5e",
   "description": "Provides an Actions List Component",
   "version": "6.0.4",
-  "author": "Andrew Krigline (akrigline)",
   "authors": [
     {
       "name": "Andrew Krigline",
@@ -12,12 +11,8 @@
       "patreon": "https://www.patreon.com/ElfFriend_DnD"
     }
   ],
-  "esmodules": [
-    "module/foundryvtt-dnd5eCharacterActions.js"
-  ],
-  "styles": [
-    "styles/foundryvtt-dnd5eCharacterActions.css"
-  ],
+  "esmodules": ["module/foundryvtt-dnd5eCharacterActions.js"],
+  "styles": ["styles/foundryvtt-dnd5eCharacterActions.css"],
   "languages": [
     {
       "lang": "en",
@@ -37,7 +32,8 @@
     ]
   },
   "compatibility": {
-    "minimum": 10
+    "minimum": 10,
+    "verified": 11
   },
   "bugs": "https://github.com/ElfFriend-DnD/foundryvtt-dnd5eCharacterActions/issues",
   "changelog": "https://github.com/ElfFriend-DnD/foundryvtt-dnd5eCharacterActions/releases",
