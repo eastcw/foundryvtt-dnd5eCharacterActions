@@ -1,4 +1,9 @@
+## Pull Requests
+
+Pull requests are welcome!
+
 ## VS Code
+
 Recommended extensions and workspace settings should force format on save.
 
 ## Lint before you push

@@ -3,7 +3,10 @@
   "name": "foundryvtt-dnd5eCharacterActions",
   "version": "6.0.4",
   "description": "A module that provides a reusable and placable component detailing a given actor's actions.",
-  "author": "Andrew Krigline",
+  "authors": [
+    "Andrew Krigline",
+    "Cameron East"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "gulp build",

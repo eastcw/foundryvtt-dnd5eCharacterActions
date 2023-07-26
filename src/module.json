@@ -5,6 +5,11 @@
   "version": "6.0.4",
   "authors": [
     {
+      "name": "Cameron East",
+      "discord": "cronosaurusrex",
+      "url": "https://github.com/eastcw"
+    },
+    {
       "name": "Andrew Krigline",
       "discord": "Calego#0914",
       "url": "https://github.com/ElfFriend-DnD",
@@ -33,14 +38,14 @@
   },
   "compatibility": {
     "minimum": 10,
-    "verified": 11
+    "verified": 11.306
   },
-  "bugs": "https://github.com/ElfFriend-DnD/foundryvtt-dnd5eCharacterActions/issues",
-  "changelog": "https://github.com/ElfFriend-DnD/foundryvtt-dnd5eCharacterActions/releases",
+  "bugs": "https://github.com/eastcw/foundryvtt-dnd5eCharacterActions/issues",
+  "changelog": "https://github.com/eastcw/foundryvtt-dnd5eCharacterActions/releases",
   "download": "https://github.com/ElfFriend-DnD/foundryvtt-dnd5eCharacterActions/releases/download/v6.0.4/module.zip",
-  "manifest": "https://github.com/ElfFriend-DnD/foundryvtt-dnd5eCharacterActions/releases/latest/download/module.json",
-  "readme": "https://raw.githubusercontent.com/ElfFriend-DnD/foundryvtt-dnd5eCharacterActions/main/README.md",
-  "url": "https://github.com/ElfFriend-DnD/foundryvtt-dnd5eCharacterActions",
+  "manifest": "https://github.com/eastcw/foundryvtt-dnd5eCharacterActions/releases/latest/download/module.json",
+  "readme": "https://github.com/eastcw/foundryvtt-dnd5eCharacterActions/blob/main/README.md",
+  "url": "https://github.com/eastcw/foundryvtt-dnd5eCharacterActions",
   "manifestPlusVersion": "1.1.0",
   "flags": {
     "allowBugReporter": true

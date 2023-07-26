@@ -8,9 +8,6 @@
 ![Foundry Core Compatible Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2FElfFriend-DnD%2Ffoundryvtt-dnd5eCharacterActions%2Fmain%2Fsrc%2Fmodule.json&label=Foundry%20Version&query=$.compatibleCoreVersion&colorB=orange)
 ![Manifest+ Version](https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2FElfFriend-DnD%2Ffoundryvtt-dnd5eCharacterActions%2Fmain%2Fsrc%2Fmodule.json&label=Manifest%2B%20Version&query=$.manifestPlusVersion&colorB=blue)
 
-[![ko-fi](https://img.shields.io/badge/-buy%20me%20a%20coke-%23FF5E5B)](https://ko-fi.com/elffriend)
-[![patreon](https://img.shields.io/badge/-patreon-%23FF424D)](https://www.patreon.com/ElfFriend_DnD)
-
 This module provides a placable reusable "component" which details all of the actions a given Character Actor can take, intending to replicate the list in the Actions Tab of the D&DBeyond character sheet. The module has two ways in which it can be used: it will either inject the actions tab itself, or another module can leverage the API it provides and use that to inject the proper HTML wherever it desires.
 
 ## List Features
@@ -74,9 +71,7 @@ Returns the output of `renderTemplate` (an `HTMLElement`) after getting the prov
 ### Example
 
 ```ts
-
 class MyCoolCharacterSheet extends ActorSheet5e {
-
   // other stuff your sheet module does...
 
   async _renderInner(...args) {
@@ -104,9 +99,7 @@ A handlebars helper is provided as well in case any sheet wants an easy way to c
 #### Example
 
 ```ts
-
 class MyCoolItemSheet extends ItemSheet5e {
-
   // other stuff your sheet module does...
 
   getData() {
@@ -130,7 +123,7 @@ class MyCoolItemSheet extends ItemSheet5e {
 type ActorActionsList = Record<
   'action' | 'bonus' | 'crew' | 'lair' | 'legendary' | 'reaction' | 'other',
   Set<Partial<Item5e>>
->
+>;
 ```
 
 When passed an actor, returns the actor's 'actions list' items organized by activation type. I'm not sure why but it seems some of the information is missing from the Item5e in this list, be wary of that if you are looking to use this in another module.
@@ -143,7 +136,7 @@ A handlebars helper is provided as well in case any sheet wants an easy way to c
 
 ```hbs
 {{#each items as |item|}}
-  {{!-- other stuff --}}
+  {{! other stuff }}
   {{#if (CAL5E-isItemInActionList item)}}Action{{/if}}
 {{/each}}
 ```
@@ -185,6 +178,8 @@ I'm honestly not sure how well this will play with modules that affect character
 - Using an item which changes charges or spell slots on any sheet that does not natively implement CharacterActions causes the tab to change.
 
 ## Acknowledgements
+
+Mostly thanks to [Andrew Krigline](https://github.com/akrigline) for creating this module and making so indispensable that I was compelled to take it over.
 
 Bootstrapped with Nick East's [create-foundry-project](https://gitlab.com/foundry-projects/foundry-pc/create-foundry-project).
 
