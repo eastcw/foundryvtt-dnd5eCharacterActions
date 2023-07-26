@@ -5,7 +5,6 @@
   "description": "A module that provides a reusable and placable component detailing a given actor's actions.",
   "author": "Andrew Krigline",
   "license": "MIT",
-  "type": "module",
   "scripts": {
     "build": "gulp build",
     "build:watch": "gulp watch",
@@ -13,14 +12,13 @@
     "clean": "gulp clean",
     "clean:link": "gulp link --clean",
     "bump-version": "gulp bumpVersion",
-    "lint": "eslint --ext .ts,.js,.mjs .",
-    "lint:fix": "eslint --ext .ts,.js,.mjs --fix .",
+    "lint": "eslint --ext .ts,.js .",
+    "lint:fix": "eslint --ext .ts,.js --fix .",
     "format": "prettier --write \"./**/*.(ts|js|json|scss)\"",
     "postinstall": "husky install"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.0.2",
-    "@rollup/stream": "^3.0.0",
     "@typhonjs-fvtt/eslint-config-foundry.js": "^0.8.0",
     "chalk": "^4.1.1",
     "eslint": "^8.45.0",
@@ -29,15 +27,14 @@
     "fs-extra": "^10.0.0",
     "gulp": "^4.0.2",
     "gulp-dart-sass": "^1.0.2",
-    "gulp-sourcemaps": "^3.0.0",
     "husky": "^7.0.1",
     "lint-staged": "^11.0.1",
     "prettier": "^2.3.2",
     "rollup": "^2.53.2",
     "rollup-plugin-typescript2": "^0.30.0",
     "semver": "^5.7.1",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0",
+    "tslib": "^1.14.1",
+    "typescript": "^4.3.5",
     "yargs": "^17.0.1"
   }
 }

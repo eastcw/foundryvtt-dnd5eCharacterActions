@@ -34,7 +34,7 @@ async function addActionsTab(app, html, data) {
 
   // Update the nav menu
   const actionsTabButton = $(
-    '<a class="item" data-tab="actions">' + getGame().i18n.localize(`DND5E.ActionPl`) + '</a>'
+    '<a class="item" data-tab="actions">' + getGame().i18n.localize(`DND5E.ActionPl`) + '</a>',
   );
   const tabs = html.find('.tabs[data-group="primary"]');
   tabs.prepend(actionsTabButton);
@@ -136,7 +136,7 @@ Hooks.once('init', async function () {
       console.warn(
         MODULE_ID,
         '|',
-        'accessing the module api on globalThis is deprecated and will be removed in a future update, check if there is an update to your sheet module'
+        'accessing the module api on globalThis is deprecated and will be removed in a future update, check if there is an update to your sheet module',
       );
       return characterActionsModuleData?.api?.renderActionsList(...args);
     },
@@ -144,7 +144,7 @@ Hooks.once('init', async function () {
       console.warn(
         MODULE_ID,
         '|',
-        'accessing the module api on globalThis is deprecated and will be removed in a future update, check if there is an update to your sheet module'
+        'accessing the module api on globalThis is deprecated and will be removed in a future update, check if there is an update to your sheet module',
       );
       return characterActionsModuleData?.api?.isItemInActionList(...args);
     },
