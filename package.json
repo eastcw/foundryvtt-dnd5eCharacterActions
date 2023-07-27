@@ -4,8 +4,8 @@
   "version": "6.0.4",
   "description": "A module that provides a reusable and placable component detailing a given actor's actions.",
   "authors": [
-    "Andrew Krigline",
-    "Cameron East"
+    "Cameron East",
+    "Andrew Krigline"
   ],
   "license": "MIT",
   "scripts": {
