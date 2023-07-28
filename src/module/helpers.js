@@ -1,15 +1,12 @@
 import { MODULE_ID, MyFlags, MySettings } from './constants';
-
-export function log(force: boolean, ...args) {
+export function log(force, ...args) {
   //@ts-ignore
   const shouldLog = force || game.modules.get('_dev-mode')?.api?.getPackageDebugValue(MODULE_ID);
-
   if (shouldLog) {
     console.log(MODULE_ID, '|', ...args);
   }
 }
-
-export function getActivationType(activationType?: DND5e.AbilityActivationType) {
+export function getActivationType(activationType) {
   switch (activationType) {
     case 'action':
     case 'bonus':
@@ -18,13 +15,11 @@ export function getActivationType(activationType?: DND5e.AbilityActivationType) 
     case 'legendary':
     case 'reaction':
       return activationType;
-
     default:
       return 'other';
   }
 }
-
-export function isActiveItem(activationType?: string) {
+export function isActiveItem(activationType) {
   if (!activationType) {
     return false;
   }
@@ -33,15 +28,13 @@ export function isActiveItem(activationType?: string) {
   }
   return true;
 }
-
-export function isItemInActionList(item: Item5e) {
+export function isItemInActionList(item) {
   // log(false, 'filtering item', {
   //   item,
   // });
 
   // check our override
-  const override = item.getFlag(MODULE_ID, MyFlags.filterOverride) as boolean | undefined;
-
+  const override = item.getFlag(MODULE_ID, MyFlags.filterOverride);
   if (override !== undefined) {
     return override;
   }
@@ -74,33 +67,25 @@ export function isItemInActionList(item: Item5e) {
 
       // only exclude spells which need to be prepared but aren't
       const notPrepared = item.system.preparation?.mode === 'prepared' && !item.system.preparation?.prepared;
-
       const isCantrip = item.system.level === 0;
-
       if (!isCantrip && (limitToCantrips || notPrepared)) {
         return false;
       }
-
       const isReaction = item.system.activation?.type === 'reaction';
       const isBonusAction = item.system.activation?.type === 'bonus';
 
       //ASSUMPTION: If the spell causes damage, it will have damageParts
       const isDamageDealer = item.system.damage?.parts?.length > 0;
-
       let shouldInclude = isReaction || isBonusAction || isDamageDealer;
-
       if (getGame().settings.get(MODULE_ID, MySettings.includeOneMinuteSpells)) {
         const isOneMinuter = item.system?.duration?.units === 'minute' && item.system?.duration?.value === 1;
         const isOneRounder = item.system?.duration?.units === 'round' && item.system?.duration?.value === 1;
-
         shouldInclude = shouldInclude || isOneMinuter || isOneRounder;
       }
-
       if (getGame().settings.get(MODULE_ID, MySettings.includeSpellsWithEffects)) {
         const hasEffects = !!item.effects.size;
         shouldInclude = shouldInclude || hasEffects;
       }
-
       return shouldInclude;
     }
     case 'feat': {
@@ -111,8 +96,7 @@ export function isItemInActionList(item: Item5e) {
     }
   }
 }
-
-export function getGame(): Game {
+export function getGame() {
   if (!(game instanceof Game)) {
     throw new Error('game is not initialized yet!');
   }

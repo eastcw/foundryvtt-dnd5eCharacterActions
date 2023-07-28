@@ -1,29 +1,26 @@
 import { getActivationType, getGame, isItemInActionList, log } from './helpers';
-
-enum ItemTypeSortValues {
-  weapon = 1,
-  equipment = 2,
-  feat = 3,
-  spell = 4,
-  consumable = 5,
-  tool = 6,
-  backpack = 7,
-  class = 8,
-  loot = 9,
-}
-
-export function getActorActionsData(actor: Actor5e) {
+var ItemTypeSortValues = /*#__PURE__*/ (function (ItemTypeSortValues) {
+  ItemTypeSortValues[(ItemTypeSortValues['weapon'] = 1)] = 'weapon';
+  ItemTypeSortValues[(ItemTypeSortValues['equipment'] = 2)] = 'equipment';
+  ItemTypeSortValues[(ItemTypeSortValues['feat'] = 3)] = 'feat';
+  ItemTypeSortValues[(ItemTypeSortValues['spell'] = 4)] = 'spell';
+  ItemTypeSortValues[(ItemTypeSortValues['consumable'] = 5)] = 'consumable';
+  ItemTypeSortValues[(ItemTypeSortValues['tool'] = 6)] = 'tool';
+  ItemTypeSortValues[(ItemTypeSortValues['backpack'] = 7)] = 'backpack';
+  ItemTypeSortValues[(ItemTypeSortValues['class'] = 8)] = 'class';
+  ItemTypeSortValues[(ItemTypeSortValues['loot'] = 9)] = 'loot';
+  return ItemTypeSortValues;
+})(ItemTypeSortValues || {});
+export function getActorActionsData(actor) {
   const filteredItems = actor.items
     .filter(isItemInActionList)
     .sort((a, b) => {
       if (a.type !== b.type) {
         return ItemTypeSortValues[a.type] - ItemTypeSortValues[b.type];
       }
-
       if (a.type === 'spell' && b.type === 'spell') {
         return a.system.level - b.system.level;
       }
-
       return (a.sort || 0) - (b.sort || 0);
     })
     .map((item) => {
@@ -41,15 +38,10 @@ export function getActorActionsData(actor: Actor5e) {
           ...rest,
         }));
       }
-
       return item;
     });
-
-  const actionsData: Record<
-    'action' | 'bonus' | 'crew' | 'lair' | 'legendary' | 'reaction' | 'other',
-    Set<Item5e>
-  > = filteredItems.reduce(
-    (acc, item: Item5e) => {
+  const actionsData = filteredItems.reduce(
+    (acc, item) => {
       try {
         log(false, 'digesting item', {
           item,
@@ -60,9 +52,7 @@ export function getActorActionsData(actor: Actor5e) {
 
         //@ts-ignore
         const activationType = getActivationType(item.system.activation?.type);
-
         acc[activationType].add(item);
-
         return acc;
       } catch (e) {
         log(true, 'error trying to digest item', item.name, e);
@@ -70,15 +60,14 @@ export function getActorActionsData(actor: Actor5e) {
       }
     },
     {
-      action: new Set<Item5e>(),
-      bonus: new Set<Item5e>(),
-      crew: new Set<Item5e>(),
-      lair: new Set<Item5e>(),
-      legendary: new Set<Item5e>(),
-      reaction: new Set<Item5e>(),
-      other: new Set<Item5e>(),
-    },
+      action: new Set(),
+      bonus: new Set(),
+      crew: new Set(),
+      lair: new Set(),
+      legendary: new Set(),
+      reaction: new Set(),
+      other: new Set(),
+    }
   );
-
   return actionsData;
 }
