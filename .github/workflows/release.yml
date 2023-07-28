@@ -100,6 +100,10 @@ jobs:
       - name: Create zip file
         working-directory: ./dist
         run: zip -r ../${{ env.package_type }}.zip .
+        
+      - name: Extract tag version number
+        id: get_version
+        uses: battila7/get-version-action@v2
 
       - name: Create release
         id: create_version_release
