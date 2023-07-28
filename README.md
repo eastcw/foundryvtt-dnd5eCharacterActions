@@ -9,7 +9,7 @@
 ![Foundry Recommended Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Feastcw%2Ffoundryvtt-dnd5eCharacterActions%2Fmain%2Fsrc%2Fmodule.json&query=%24.compatibility.verified&label=Recommended%20Core%20Version&color=green)
 ![Manifest+ Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Feastcw%2Ffoundryvtt-dnd5eCharacterActions%2Fmain%2Fsrc%2Fmodule.json&query=%24.manifestPlusVersion&label=Manifest%2B%20Version&color=blue)
 
-aThis module provides a placable reusable "component" which details all of the actions a given Character Actor can take, intending to replicate the list in the Actions Tab of the D&DBeyond character sheet. The module has two ways in which it can be used: it will either inject the actions tab itself, or another module can leverage the API it provides and use that to inject the proper HTML wherever it desires.
+This module provides a placable reusable "component" which details all of the actions a given Character Actor can take, intending to replicate the list in the Actions Tab of the D&DBeyond character sheet. The module has two ways in which it can be used: it will either inject the actions tab itself, or another module can leverage the API it provides and use that to inject the proper HTML wherever it desires.
 
 ## List Features
 
@@ -167,12 +167,13 @@ I'm honestly not sure how well this will play with modules that affect character
 
 | **Name**                                                                                            |       Works        | Notes                                                             |
 | --------------------------------------------------------------------------------------------------- | :----------------: | ----------------------------------------------------------------- |
-| [Better Rolls 5e](https://github.com/RedReign/FoundryVTT-BetterRolls5e)                             | :white_check_mark: | Compatible with version 1.3.7+.                                   |
-| [Midi-QOL](https://gitlab.com/tposney/midi-qol)                                                     | :white_check_mark: | Works as expected.                                                |
-| [Minimal Roll Enhancements](https://github.com/schultzcole/FVTT-Minimal-Rolling-Enhancements-DND5E) | :white_check_mark: | Works as expected.                                                |
-| [Mars 5e](https://github.com/Moerill/fvtt-mars-5e)                                                  | :white_check_mark: | Works as expected.                                                |
+| [Ready Set Roll 5e](https://github.com/MangoFVTT/fvtt-ready-set-roll-5e)                            | :heavy_check_mark: | seems to work well as a drop-in replacement for Better Rolls 5e   |
+| [Better Rolls 5e](https://github.com/RedReign/FoundryVTT-BetterRolls5e)                             |        :x:         | Compatible with version 1.3.7+.                                   |
+| [Midi-QOL](https://gitlab.com/tposney/midi-qol)                                                     | :heavy_check_mark: | Works as expected.                                                |
+| [Minimal Roll Enhancements](https://github.com/schultzcole/FVTT-Minimal-Rolling-Enhancements-DND5E) | :heavy_check_mark: | Works as expected.                                                |
+| [Mars 5e](https://github.com/Moerill/fvtt-mars-5e)                                                  | :heavy_check_mark: | Works as expected.                                                |
 | [FoundryVTT Magic Items](https://gitlab.com/riccisi/foundryvtt-magic-items)                         |      :shrug:       | Spells assigned to magic items do not appear in the Actions List. |
-| [Inventory+](https://github.com/syl3r86/inventory-plus)                                             | :white_check_mark: | Inventory+ organization has no effect on Actions Tab              |
+| [Inventory+](https://github.com/syl3r86/inventory-plus)                                             | :heavy_check_mark: | Inventory+ organization has no effect on Actions Tab              |
 
 ## Known Issues
 
