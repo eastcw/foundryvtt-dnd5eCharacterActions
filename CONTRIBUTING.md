@@ -4,7 +4,7 @@ Please log an issue if you have any problems using the module, or if you have an
 
 ## Pull Requests
 
-Pull requests are welcome! If you have the capacity and know-how to help me add features or squash bugs, please do open pull requests.
+Pull requests are welcome! If you have the capacity and know-how to help me add features or squash bugs, please do open pull requests. It may be helpful to also open an issue to describe and document the bug or feature your pull request fixes or adds, but that's totally optional.
 
 ## VS Code
 

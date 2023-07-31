@@ -100,10 +100,13 @@ jobs:
       - name: Create zip file
         working-directory: ./dist
         run: zip -r ../${{ env.package_type }}.zip .
-        
+
       - name: Extract tag version number
         id: get_version
         uses: battila7/get-version-action@v2
+
+      # - run: echo ${{ steps.get_version.outputs.version }}
+      # - run: echo ${{ steps.get_version.outputs.version-without-v }}
 
       - name: Create release
         id: create_version_release
@@ -123,5 +126,5 @@ jobs:
           username: ${{ secrets.FOUNDRY_ADMIN_USER }}
           password: ${{ secrets.FOUNDRY_ADMIN_PW }}
           module-id: ${{ secrets.FOUNDRY_MODULE_ID }}
-          manifest-url: https://github.com/${{github.repository}}/releases/download/v${{ steps.get-version.outputs.version }}/module.json
+          manifest-url: https://github.com/${{github.repository}}/releases/download/${{ steps.get_version.outputs.version }}/module.json
           manifest-file: src/module.json

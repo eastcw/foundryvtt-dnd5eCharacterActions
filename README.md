@@ -9,11 +9,13 @@
 ![Foundry Recommended Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Feastcw%2Ffoundryvtt-dnd5eCharacterActions%2Fmain%2Fsrc%2Fmodule.json&query=%24.compatibility.verified&label=Recommended%20Core%20Version&color=green)
 ![Manifest+ Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Feastcw%2Ffoundryvtt-dnd5eCharacterActions%2Fmain%2Fsrc%2Fmodule.json&query=%24.manifestPlusVersion&label=Manifest%2B%20Version&color=blue)
 
+[![Static Badge](https://img.shields.io/badge/-Buy%20me%20a%20drink-purple)](https://ko-fi.com/eastcw)
+
 This module provides a placable reusable "component" which details all of the actions a given Character Actor can take, intending to replicate the list in the Actions Tab of the D&DBeyond character sheet. The module has two ways in which it can be used: it will either inject the actions tab itself, or another module can leverage the API it provides and use that to inject the proper HTML wherever it desires.
 
 ## List Features
 
-By default the list will attempt to narrow down your active abilities, items, and spells into the ones most likely to be useful in Combat. The full logic for the filter is in `isItemInActionList` inside `src/modules/helpers.ts`. Here are the basics:
+By default the list will attempt to narrow down your active abilities, items, and spells into the ones most likely to be useful in combat. The full logic for the filter is in `isItemInActionList` inside `src/modules/helpers.js`. Here are the basics:
 
 For Weapons:
 
@@ -46,7 +48,7 @@ Additionally, you can override the default list by selectively including or excl
 Module JSON:
 
 ```
-https://github.com/ElfFriend-DnD/foundryvtt-dnd5eCharacterActions/releases/latest/download/module.json
+https://github.com/eastcw/foundryvtt-dnd5eCharacterActions/releases/latest/download/module.json
 ```
 
 ## Options
@@ -167,8 +169,8 @@ I'm honestly not sure how well this will play with modules that affect character
 
 | **Name**                                                                                            |       Works        | Notes                                                             |
 | --------------------------------------------------------------------------------------------------- | :----------------: | ----------------------------------------------------------------- |
-| [Ready Set Roll 5e](https://github.com/MangoFVTT/fvtt-ready-set-roll-5e)                            | :heavy_check_mark: | seems to work well as a drop-in replacement for Better Rolls 5e   |
-| [Better Rolls 5e](https://github.com/RedReign/FoundryVTT-BetterRolls5e)                             |        :x:         | Compatible with version 1.3.7+.                                   |
+| [Ready Set Roll 5e](https://github.com/MangoFVTT/fvtt-ready-set-roll-5e)                            | :heavy_check_mark: | Seems to work well as a drop-in replacement for Better Rolls 5e   |
+| [Better Rolls 5e](https://github.com/RedReign/FoundryVTT-BetterRolls5e)                             |        :x:         | Deprecated and no longer updated. Use Ready Set Roll instead.     |
 | [Midi-QOL](https://gitlab.com/tposney/midi-qol)                                                     | :heavy_check_mark: | Works as expected.                                                |
 | [Minimal Roll Enhancements](https://github.com/schultzcole/FVTT-Minimal-Rolling-Enhancements-DND5E) | :heavy_check_mark: | Works as expected.                                                |
 | [Mars 5e](https://github.com/Moerill/fvtt-mars-5e)                                                  | :heavy_check_mark: | Works as expected.                                                |
