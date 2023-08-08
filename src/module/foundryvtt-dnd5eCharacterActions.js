@@ -1,9 +1,9 @@
 /* eslint-disable no-case-declarations */
-import { registerSettings } from './settings';
-import { MODULE_ABBREV, MODULE_ID, MySettings, TEMPLATES } from './constants';
-import { getGame, isItemInActionList, log } from './helpers';
-import { getActorActionsData } from './getActorActionsData';
-import { addFavoriteControls } from './handleFavoriteControls';
+import { registerSettings } from './scripts/settings';
+import { MODULE_ABBREV, MODULE_ID, MySettings, TEMPLATES } from './scripts/constants';
+import { getGame, isItemInActionList, log } from './scripts/helpers';
+import { getActorActionsData, renderActionsList } from './scripts/api';
+import { addFavoriteControls } from './scripts/handleFavoriteControls';
 Handlebars.registerHelper(`${MODULE_ABBREV}-isEmpty`, (input) => {
   if (input instanceof Array) {
     return input.length < 1;
@@ -58,49 +58,6 @@ async function addActionsTab(app, html, data) {
   } else {
     actionsTabHtml.find('.rollable').each((i, el) => el.classList.remove('rollable'));
   }
-}
-const damageTypeIconMap = {
-  acid: '<i class="fas fa-hand-holding-water"></i>',
-  bludgeoning: '<i class="fas fa-gavel"></i>',
-  cold: '<i class="fas fa-snowflake"></i>',
-  fire: '<i class="fas fa-fire-alt"></i>',
-  force: '<i class="fas fa-hat-wizard"></i>',
-  lightning: '<i class="fas fa-bolt"></i>',
-  necrotic: '<i class="fas fa-skull"></i>',
-  piercing: '<i class="fas fa-thumbtack"></i>',
-  poison: '<i class="fas fa-skull-crossbones"></i>',
-  psychic: '<i class="fas fa-brain"></i>',
-  radiant: '<i class="fas fa-sun"></i>',
-  slashing: '<i class="fas fa-cut"></i>',
-  thunder: '<i class="fas fa-wind"></i>',
-  healing: '<i class="fas fa-heart"></i>',
-  temphp: '<i class="fas fa-shield-alt"></i>',
-};
-
-/**
- * Renders the html of the actions list for the provided actor data
- */
-async function renderActionsList(actorData, options) {
-  const actionData = getActorActionsData(actorData);
-  log(false, 'renderActionsList', {
-    actorData,
-    data: actionData,
-  });
-  return renderTemplate(`modules/${MODULE_ID}/templates/actor-actions-list.hbs`, {
-    actionData,
-    abilities: getGame().dnd5e.config.abilityAbbreviations,
-    activationTypes: {
-      ...getGame().dnd5e.config.abilityActivationTypes,
-      other: getGame().i18n.localize(`DND5E.ActionOther`),
-    },
-    damageTypes: {
-      ...getGame().dnd5e.config.damageTypes,
-      ...getGame().dnd5e.config.healingTypes,
-    },
-    damageTypeIconMap,
-    rollIcon: options?.rollIcon,
-    isOwner: actorData.isOwner,
-  });
 }
 
 /* ------------------------------------ */
