@@ -1,10 +1,12 @@
 import { MODULE_ID } from './constants';
+
 export function log(force, ...args) {
   const shouldLog = force || game.modules.get('_dev-mode')?.api?.getPackageDebugValue(MODULE_ID);
   if (shouldLog) {
     console.log(MODULE_ID, '|', ...args);
   }
 }
+
 export function getActivationType(activationType) {
   switch (activationType) {
     case 'action':
@@ -18,6 +20,7 @@ export function getActivationType(activationType) {
       return 'other';
   }
 }
+
 export function isActiveItem(activationType) {
   if (!activationType) {
     return false;

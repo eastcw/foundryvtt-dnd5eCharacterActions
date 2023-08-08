@@ -1,36 +1,5 @@
 import { getActivationType, getGame, log, isActiveItem } from './helpers';
-import { MODULE_ID, MyFlags, MySettings } from './constants';
-
-const damageTypeIconMap = {
-  acid: '<i class="fas fa-hand-holding-water"></i>',
-  bludgeoning: '<i class="fas fa-gavel"></i>',
-  cold: '<i class="fas fa-snowflake"></i>',
-  fire: '<i class="fas fa-fire-alt"></i>',
-  force: '<i class="fas fa-hat-wizard"></i>',
-  lightning: '<i class="fas fa-bolt"></i>',
-  necrotic: '<i class="fas fa-skull"></i>',
-  piercing: '<i class="fas fa-thumbtack"></i>',
-  poison: '<i class="fas fa-skull-crossbones"></i>',
-  psychic: '<i class="fas fa-brain"></i>',
-  radiant: '<i class="fas fa-sun"></i>',
-  slashing: '<i class="fas fa-cut"></i>',
-  thunder: '<i class="fas fa-wind"></i>',
-  healing: '<i class="fas fa-heart"></i>',
-  temphp: '<i class="fas fa-shield-alt"></i>',
-};
-
-var ItemTypeSortValues = /*#__PURE__*/ (function (ItemTypeSortValues) {
-  ItemTypeSortValues[(ItemTypeSortValues['weapon'] = 1)] = 'weapon';
-  ItemTypeSortValues[(ItemTypeSortValues['equipment'] = 2)] = 'equipment';
-  ItemTypeSortValues[(ItemTypeSortValues['feat'] = 3)] = 'feat';
-  ItemTypeSortValues[(ItemTypeSortValues['spell'] = 4)] = 'spell';
-  ItemTypeSortValues[(ItemTypeSortValues['consumable'] = 5)] = 'consumable';
-  ItemTypeSortValues[(ItemTypeSortValues['tool'] = 6)] = 'tool';
-  ItemTypeSortValues[(ItemTypeSortValues['backpack'] = 7)] = 'backpack';
-  ItemTypeSortValues[(ItemTypeSortValues['class'] = 8)] = 'class';
-  ItemTypeSortValues[(ItemTypeSortValues['loot'] = 9)] = 'loot';
-  return ItemTypeSortValues;
-})(ItemTypeSortValues || {});
+import { MODULE_ID, MyFlags, MySettings, damageTypeIconMap, ItemTypeSortValues } from './constants';
 
 export function getActorActionsData(actor) {
   const filteredItems = actor.items
@@ -167,7 +136,7 @@ export function renderActionsList(actorData, options) {
   });
   return renderTemplate(`modules/${MODULE_ID}/templates/actor-actions-list.hbs`, {
     actionData,
-    abilities: getGame().dnd5e.config.abilityAbbreviations,
+    abilities: getGame().dnd5e.config.abilities.label,
     activationTypes: {
       ...getGame().dnd5e.config.abilityActivationTypes,
       other: getGame().i18n.localize(`DND5E.ActionOther`),
