@@ -1,9 +1,10 @@
 /* eslint-disable no-case-declarations */
 import { registerSettings } from './scripts/settings';
-import { MODULE_ABBREV, MODULE_ID, MySettings, TEMPLATES } from './scripts/constants';
-import { getGame, isItemInActionList, log } from './scripts/helpers';
-import { getActorActionsData, renderActionsList } from './scripts/api';
+import { MODULE_ID, MODULE_ABBREV, MySettings, TEMPLATES } from './scripts/constants';
+import { getGame, log } from './scripts/helpers';
+import { getActorActionsData, renderActionsList, isItemInActionList } from './scripts/api';
 import { addFavoriteControls } from './scripts/handleFavoriteControls';
+
 Handlebars.registerHelper(`${MODULE_ABBREV}-isEmpty`, (input) => {
   if (input instanceof Array) {
     return input.length < 1;
@@ -46,14 +47,11 @@ async function addActionsTab(app, html, data) {
   const actionsTabHtml = $(await renderActionsList(app.actor));
   actionsTab.append(actionsTabHtml);
 
-  // @ts-ignore
   actionsTabHtml.find('.item .item-name.rollable h4').click((event) => app._onItemSummary(event));
 
   // owner only listeners
   if (data.owner) {
-    // @ts-ignore
     actionsTabHtml.find('.item .item-image').click((event) => app._onItemUse(event));
-    // @ts-ignore
     actionsTabHtml.find('.item .item-recharge').click((event) => app._onItemRecharge(event));
   } else {
     actionsTabHtml.find('.rollable').each((i, el) => el.classList.remove('rollable'));

@@ -1,5 +1,7 @@
 import { MODULE_ABBREV, MODULE_ID, MyFlags } from './constants';
-import { getGame, isItemInActionList, log } from './helpers';
+import { getGame, log } from './helpers';
+import { isItemInActionList } from './api';
+
 export function addFavoriteControls(app, html) {
   function createFavButton(filterOverride) {
     return `<a class="item-control item-action-filter-override ${filterOverride ? 'active' : ''}" title="${

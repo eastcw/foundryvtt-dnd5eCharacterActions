@@ -39,7 +39,7 @@
   },
   "compatibility": {
     "minimum": 10,
-    "verified": 11.306
+    "verified": 11.307
   },
   "bugs": "https://github.com/eastcw/foundryvtt-dnd5eCharacterActions/issues",
   "changelog": "https://github.com/eastcw/foundryvtt-dnd5eCharacterActions/releases",
