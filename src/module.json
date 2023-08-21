@@ -2,7 +2,7 @@
   "id": "character-actions-list-5e",
   "title": "Character Actions List dnd5e",
   "description": "Provides an Actions List Component",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "authors": [
     {
       "name": "Cameron East",
@@ -31,15 +31,15 @@
         "id": "dnd5e",
         "type": "system",
         "compatibility": {
-          "minimum": "2.0.0",
-          "verified": "2.2.2"
+          "minimum": "2.2.0",
+          "verified": "2.3.0"
         }
       }
     ]
   },
   "compatibility": {
     "minimum": 10,
-    "verified": 11.306
+    "verified": 11.307
   },
   "bugs": "https://github.com/eastcw/foundryvtt-dnd5eCharacterActions/issues",
   "changelog": "https://github.com/eastcw/foundryvtt-dnd5eCharacterActions/releases",
