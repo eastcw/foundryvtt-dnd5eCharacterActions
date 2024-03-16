@@ -68,19 +68,11 @@ async function addActionsTab(app, html, data) {
     const sheetBody = html.find('.sheet-body');
     const actionsTab = $(`<div class="tab actions flexcol" data-group="primary" data-tab="actions"></div>`);
     sheetBody.prepend(actionsTab);
-    // Create the tab
-    const sheetBody = html.find('.sheet-body');
-    const actionsTab = $(`<div class="tab actions flexcol" data-group="primary" data-tab="actions"></div>`);
-    sheetBody.prepend(actionsTab);
 
     // add the list to the tab
     const actionsTabHtml = $(await renderActionsList(app.actor));
     actionsTab.append(actionsTabHtml);
-    // add the list to the tab
-    const actionsTabHtml = $(await renderActionsList(app.actor));
-    actionsTab.append(actionsTabHtml);
 
-    actionsTabHtml.find('.item .item-name.rollable h4').click((event) => app._onItemSummary(event));
     actionsTabHtml.find('.item .item-name.rollable h4').click((event) => app._onItemSummary(event));
 
     // owner only listeners
