@@ -50,7 +50,11 @@
     position: absolute;
     bottom: -0.1em;
     left: 0.7em;
-    text-shadow: -1px -1px 0 #c9c7b8, 1px -1px 0 #c9c7b8, -1px 1px 0 #c9c7b8, 1px 1px 0 #c9c7b8;
+    text-shadow:
+      -1px -1px 0 #c9c7b8,
+      1px -1px 0 #c9c7b8,
+      -1px 1px 0 #c9c7b8,
+      1px 1px 0 #c9c7b8;
     font-size: 0.7em;
   }
 
@@ -87,9 +91,9 @@
       }
     }
     .item-controls.context-menu {
-			min-width: 30px !important;
-			max-width: 30px !important;
-			justify-content: center !important;
-		}
+      min-width: 30px !important;
+      max-width: 30px !important;
+      justify-content: center !important;
+    }
   }
 }
