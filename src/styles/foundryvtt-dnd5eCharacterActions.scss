@@ -81,8 +81,15 @@
   .character-actions-dnd5e {
     .items-header {
       .item-controls {
-        display: none;
+        min-width: 30px !important;
+        max-width: 30px !important;
+        justify-content: center !important;
       }
     }
+    .item-controls.context-menu {
+			min-width: 30px !important;
+			max-width: 30px !important;
+			justify-content: center !important;
+		}
   }
 }
