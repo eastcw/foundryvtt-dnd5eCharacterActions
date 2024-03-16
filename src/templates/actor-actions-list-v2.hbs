@@ -1,0 +1,134 @@
+<dnd5e-inventory>
+{{#*inline 'action-sublist'}}
+{{#unless (CAL5E-isEmpty items)}}
+  <div class="items-section card" data-type="action">
+
+    <div class="items-header header">
+        <h3 class="item-name">{{label}}</h3>
+        <div class="item-header item-uses"></div>
+        <div class="item-header item-usage"></div>
+        <div class="item-header item-range">{{localize "DND5E.Range"}}</div>
+        <div class="item-header item-roll">{{localize "CAL5E.HitDC"}}</div>
+        <div class="item-header item-uses">{{localize "DND5E.Damage"}}</div>
+        {{#if @root/isOwner}}
+          <div class="item-controls"></div>
+        {{/if}}
+    </div>
+
+    <ol class="item-list unlist">
+      {{#each items as |item|}}
+        <li class="item context-enabled" data-item-id="{{item.id}}" data-entry-id="{{item.id}}"  data-item-name="{{item.name}}" data-item-sort="0" data-ungrouped="all" data-grouped="{{item.type}}" draggable="true">
+
+          <div class="item-name item-action item-tooltip rollable" role="button" data-action="use" aria-label="{{item.name}}" data-tooltip="
+              <section class=&quot;loading&quot; data-uuid=&quot;Actor.{{actor.id}}.Item.{{item.id}}&quot;><i class=&quot;fas fa-spinner fa-spin-pulse&quot;></i></section>
+              " data-tooltip-class="dnd5e2 dnd5e-tooltip item-tooltip" data-tooltip-direction="LEFT">
+              <img class="item-image gold-icon" src="{{item.img}}" alt="{{item.name}}">
+              <div class="name name-stacked">
+                  <span class="title">{{item.name}}</span>
+                  <span class="subtitle">
+                    {{#if (ne item.type 'spell')}}
+                      {{item.labels.type}}
+                    {{/if}}
+                    {{#if (and (eq item.type 'spell') (ne item.system.level 0))}}
+                      {{item.labels.level}} {{item.labels.school}}
+                    {{else}}
+                      {{item.labels.school}} {{item.labels.level}}
+                    {{/if}}
+                  </span>
+              </div>
+          </div>
+
+          <div class="item-detail item-uses" title="{{localize 'DND5E.Uses'}}">
+            {{#if (or item.system.recharge.value item.hasLimitedUses (eq item.system.activation.type "legendary"))}}
+
+              {{#if (and item.system.recharge.charged item.system.recharge.value)}}
+                {{localize "DND5E.Charged"}}
+              {{else if item.system.recharge.value}}
+                <a class="item-recharge rollable">{{item.labels.recharge}}</a>
+              {{else if item.hasLimitedUses}}
+                {{#if (and (eq item.system.uses.value item.system.uses.max) item.system.uses.autoDestroy)}}
+                  <span title='{{item.system.quantity}}'>{{item.system.quantity}}</span>
+                  <small>{{localize "DND5E.Quantity"}}</small>
+                {{else}}
+                  <span>
+                    {{item.system.uses.value}} / {{item.system.uses.max}}
+                  </span>
+                {{/if}}
+              {{/if}}
+              {{#if (eq item.system.activation.type 'legendary')}}
+                {{item.system.activation.cost}}
+              {{/if}}
+            {{/if}}
+          </div>
+
+          <div class="item-header item-usage">
+            {{#if (eq system.activation.type "action")}}
+              {{system.activation.cost}} A
+            {{else if (eq system.activation.type "bonus")}}
+              {{system.activation.cost}} BA
+            {{else if (eq system.activation.type "reaction")}}
+              {{system.activation.cost}} R
+            {{else if (eq system.activation.type "special")}}
+              S
+            {{else}}
+              {{system.activation.cost}} {{system.activation.type}}
+            {{/if}}
+          </div>
+
+          <div class="item-detail item-range name-stacked">
+            {{#if (eq system.target.type 'self')}}
+             <span title="{{labels.target}}">{{labels.target}}</span>
+            {{else}}
+               <span title="{{labels.range}}">
+                  <span class="value">{{item.system.range.value}}</span>
+                  <span class="units">{{item.system.range.units}}</span>
+               </span>
+              {{#if labels.target}}
+                <small title="{{labels.target}}">
+                  {{labels.target}}
+                </small>
+              {{/if}}
+            {{/if}}
+          </div>
+
+          <div class="item-detail item-roll">
+            {{#if item.hasAttack}}
+              <span title="{{labels.toHit}}">{{labels.toHit}}</span>
+            {{/if}}
+            {{#if item.hasSave}}
+              <div class="stacked">
+                <span class="ability">{{item.system.save.ability}}</span>
+                <span class="value">{{item.system.save.dc}}</span>
+              </div>
+            {{/if}}
+          </div>
+
+          <div class="item-detail item-uses">
+            {{#each labels.derivedDamage}}
+            <p title="{{#if label}}{{label}}{{else}}{{formula}} {{lookup @root/damageTypes
+                damageType}}{{/if}}">
+              {{formula}} <span>{{{lookup @root/damageTypeIconMap
+                damageType}}}</span>
+            </p>
+            {{/each}}
+          </div>
+
+          {{#if @root/isOwner}}
+            <div class="item-detail item-controls">
+              {{!-- Control is Injected in handleFavoriteControls.ts --}}
+            </div>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ol>
+  </div>
+{{/unless}}
+{{/inline}}
+
+
+<section class="character-actions-dnd5e items-list">
+  {{#each actionData as |data key| }}
+    {{> action-sublist items=data label=(lookup @root/activationTypes key) }}
+  {{/each}}
+</section>
+</dnd5e-inventory>

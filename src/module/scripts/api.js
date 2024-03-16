@@ -132,21 +132,42 @@ export function renderActionsList(actorData, options) {
   const actionData = getActorActionsData(actorData);
   log(false, 'renderActionsList', {
     actorData,
+    options,
     data: actionData,
   });
-  return renderTemplate(`modules/${MODULE_ID}/templates/actor-actions-list.hbs`, {
-    actionData,
-    abilities: getGame().dnd5e.config.abilities.label,
-    activationTypes: {
-      ...getGame().dnd5e.config.abilityActivationTypes,
-      other: getGame().i18n.localize(`DND5E.ActionOther`),
-    },
-    damageTypes: {
-      ...getGame().dnd5e.config.damageTypes,
-      ...getGame().dnd5e.config.healingTypes,
-    },
-    damageTypeIconMap,
-    rollIcon: options?.rollIcon,
-    isOwner: actorData.isOwner,
-  });
+  if (options !== undefined) {
+    if (options.sheetVersion == 'actor-actions-list-v2') {
+      return renderTemplate(`modules/${MODULE_ID}/templates/actor-actions-list-v2.hbs`, {
+        actionData,
+        abilities: getGame().dnd5e.config.abilities.label,
+        activationTypes: {
+          ...getGame().dnd5e.config.abilityActivationTypes,
+          other: getGame().i18n.localize(`DND5E.ActionOther`),
+        },
+        damageTypes: {
+          ...getGame().dnd5e.config.damageTypes,
+          ...getGame().dnd5e.config.healingTypes,
+        },
+        damageTypeIconMap,
+        rollIcon: options?.rollIcon,
+        isOwner: actorData.isOwner,
+      });
+    }
+  } else {
+    return renderTemplate(`modules/${MODULE_ID}/templates/actor-actions-list.hbs`, {
+      actionData,
+      abilities: getGame().dnd5e.config.abilities.label,
+      activationTypes: {
+        ...getGame().dnd5e.config.abilityActivationTypes,
+        other: getGame().i18n.localize(`DND5E.ActionOther`),
+      },
+      damageTypes: {
+        ...getGame().dnd5e.config.damageTypes,
+        ...getGame().dnd5e.config.healingTypes,
+      },
+      damageTypeIconMap,
+      rollIcon: options?.rollIcon,
+      isOwner: actorData.isOwner,
+    });
+  }
 }
