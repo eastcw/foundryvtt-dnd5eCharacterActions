@@ -2,7 +2,7 @@
   "id": "character-actions-list-5e",
   "title": "Character Actions List dnd5e",
   "description": "Provides an Actions List Component",
-  "version": "6.1.2",
+  "version": "7.0.0",
   "authors": [
     {
       "name": "Cameron East",
@@ -31,9 +31,8 @@
         "id": "dnd5e",
         "type": "system",
         "compatibility": {
-          "minimum": "2.2.0",
-          "verified": "2.4.1",
-          "maximum": "2.4.1"
+          "minimum": "3.0.0",
+          "verified": "3.0.4"
         }
       }
     ]

@@ -31,30 +31,57 @@ async function addActionsTab(app, html, data) {
     return;
   }
 
-  // Update the nav menu
-  const actionsTabButton = $(
-    '<a class="item" data-tab="actions">' + getGame().i18n.localize(`DND5E.ActionPl`) + '</a>'
-  );
-  const tabs = html.find('.tabs[data-group="primary"]');
-  tabs.prepend(actionsTabButton);
+  if ($(html).closest('.sheet').is('.dnd5e2')) {
+    // New 5e 3.0 Character sheets
+    // Update the nav menu
+    const actionsTabButton = $('<a class="item" data-tab="actions"> \n <i class="fas fa-fist-raised"></i> \n </a>');
+    const tabs = html.find('.tabs[data-group="primary"]');
+    tabs.prepend(actionsTabButton);
 
-  // Create the tab
-  const sheetBody = html.find('.sheet-body');
-  const actionsTab = $(`<div class="tab actions flexcol" data-group="primary" data-tab="actions"></div>`);
-  sheetBody.prepend(actionsTab);
+    // Create the tab
+    const tabBody = html.find('.tab-body');
+    const actionsTab = $(`<div class="tab actions flexcol" data-group="primary" data-tab="actions"></div>`);
+    tabBody.prepend(actionsTab);
 
-  // add the list to the tab
-  const actionsTabHtml = $(await renderActionsList(app.actor));
-  actionsTab.append(actionsTabHtml);
+    // add the list to the tab
+    const actionsTabHtml = $(await renderActionsList(app.actor, { sheetVersion: 'actor-actions-list-v2' }));
+    actionsTab.append(actionsTabHtml);
 
-  actionsTabHtml.find('.item .item-name.rollable h4').click((event) => app._onItemSummary(event));
+    actionsTabHtml.find('.item .item-name.rollable h4').click((event) => app._onItemSummary(event));
 
-  // owner only listeners
-  if (data.owner) {
-    actionsTabHtml.find('.item .item-image').click((event) => app._onItemUse(event));
-    actionsTabHtml.find('.item .item-recharge').click((event) => app._onItemRecharge(event));
+    // owner only listeners
+    if (data.owner) {
+      actionsTabHtml.find('.item .item-image').click((event) => app._onItemUse(event));
+      actionsTabHtml.find('.item .item-recharge').click((event) => app._onItemRecharge(event));
+    } else {
+      actionsTabHtml.find('.rollable').each((i, el) => el.classList.remove('rollable'));
+    }
   } else {
-    actionsTabHtml.find('.rollable').each((i, el) => el.classList.remove('rollable'));
+    // Update the nav menu
+    const actionsTabButton = $(
+      '<a class="item" data-tab="actions">' + getGame().i18n.localize(`DND5E.ActionPl`) + '</a>'
+    );
+    const tabs = html.find('.tabs[data-group="primary"]');
+    tabs.prepend(actionsTabButton);
+
+    // Create the tab
+    const sheetBody = html.find('.sheet-body');
+    const actionsTab = $(`<div class="tab actions flexcol" data-group="primary" data-tab="actions"></div>`);
+    sheetBody.prepend(actionsTab);
+
+    // add the list to the tab
+    const actionsTabHtml = $(await renderActionsList(app.actor));
+    actionsTab.append(actionsTabHtml);
+
+    actionsTabHtml.find('.item .item-name.rollable h4').click((event) => app._onItemSummary(event));
+
+    // owner only listeners
+    if (data.owner) {
+      actionsTabHtml.find('.item .item-image').click((event) => app._onItemUse(event));
+      actionsTabHtml.find('.item .item-recharge').click((event) => app._onItemRecharge(event));
+    } else {
+      actionsTabHtml.find('.rollable').each((i, el) => el.classList.remove('rollable'));
+    }
   }
 }
 

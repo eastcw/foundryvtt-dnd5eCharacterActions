@@ -1,3 +1,4 @@
+<dnd5e-inventory>
 {{#*inline 'action-sublist'}}
 {{#unless (CAL5E-isEmpty items)}}
 <li class="items-header flexrow">
@@ -12,14 +13,15 @@
   </div>
   {{/if}}
 </li>
+
 <ol class="item-list">
   {{#each items as |item|}}
 
   <li class="item context-enabled flexrow" data-item-id="{{item.id}}">
     <div class="item-name flexrow rollable">
-      <div class="item-image" style="background-image: url({{item.img}})">{{{ @root/rollIcon }}}</div>
+      <div class="item-image item-action" data-action="use" style="background-image: url({{item.img}})">{{{ @root/rollIcon }}}</div>
       <div class="flexcol action-item-name-column">
-        <h4 title="{{item.name}}{{~#if (gt item.system.quantity 1)}} ({{item.system.quantity}}){{/if}}">
+        <h4 class="item-action" data-action="expand" data-tooltip="{{item.name}}{{~#if (gt item.system.quantity 1)}} ({{item.system.quantity}}){{/if}}">
           {{item.name}}
         </h4>
         <small>
@@ -35,7 +37,7 @@
       </div>
 
       {{#if (or item.system.recharge.value item.hasLimitedUses (eq item.system.activation.type "legendary"))}}
-      <div class="item-detail item-uses" title="{{localize 'DND5E.Uses'}}">
+      <div class="item-detail item-uses" data-tooltip="{{localize 'DND5E.Uses'}}">
 
         {{#if (and item.system.recharge.charged item.system.recharge.value)}}
 
@@ -48,7 +50,7 @@
         {{else if item.hasLimitedUses}}
 
         {{#if (and (eq item.system.uses.value item.system.uses.max) item.system.uses.autoDestroy)}}
-        <span title='{{item.system.quantity}}'>{{item.system.quantity}}</span>
+        <span data-tooltip='{{item.system.quantity}}'>{{item.system.quantity}}</span>
         <small>{{localize "DND5E.Quantity"}}</small>
         {{else}}
         <span>
@@ -67,11 +69,11 @@
 
     <div class="item-detail action-range">
       {{#if (eq system.target.type 'self')}}
-      <span title="{{labels.target}}">{{labels.target}}</span>
+      <span data-tooltip="{{labels.target}}">{{labels.target}}</span>
       {{else}}
-      <span title="{{labels.range}}">{{labels.range}}</span>
+      <span data-tooltip="{{labels.range}}">{{labels.range}}</span>
       {{#if labels.target}}
-      <small title="{{labels.target}}">
+      <small data-tooltip="{{labels.target}}">
         {{labels.target}}
       </small>
       {{/if}}
@@ -81,17 +83,17 @@
     <div class="item-detail to-hit-cell">
       {{#if (or labels.save labels.toHit)}}
       {{#unless (or (eq labels.save "") (eq labels.save undefined))}}
-      <span title="{{labels.save}}">{{localize DND5E.AbbreviationDC}} {{system.save.dc}}</span>
+      <span data-tooltip="{{labels.save}}">{{localize DND5E.AbbreviationDC}} {{system.save.dc}}</span>
       <small>{{lookup @root/abilities system.save.ability}}</small>
       {{else}}
-      <span title="{{labels.toHit}}">{{labels.toHit}}</span>
+      <span data-tooltip="{{labels.toHit}}">{{labels.toHit}}</span>
       {{/unless}}
       {{/if}}
     </div>
 
     <div class="item-detail damage-cell">
       {{#each labels.derivedDamage}}
-      <p title="{{#if label}}{{label}}{{else}}{{formula}} {{lookup @root/damageTypes
+      <p data-tooltip="{{#if label}}{{label}}{{else}}{{formula}} {{lookup @root/damageTypes
           damageType}}{{/if}}">
         {{formula}} <span>{{{lookup @root/damageTypeIconMap
           damageType}}}</span>
@@ -117,3 +119,4 @@
   {{> action-sublist items=data label=(lookup @root/activationTypes key) }}
   {{/each}}
 </ol>
+</dnd5e-inventory>
