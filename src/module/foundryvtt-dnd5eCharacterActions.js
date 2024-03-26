@@ -34,7 +34,9 @@ async function addActionsTab(app, html, data) {
   if ($(html).closest('.sheet').is('.dnd5e2')) {
     // New 5e 3.0 Character sheets
     // Update the nav menu
-    const actionsTabButton = $('<a class="item" data-tab="actions"> \n <i class="fas fa-fist-raised"></i> \n </a>');
+    const actionsTabButton = $(
+      '<a class="item control" data-group="primary" data-tab="actions" data-tooltip="DND5E.ActionPl" aria-label="DND5E.ActionPl"> \n <i class="fas fa-fist-raised"></i> \n </a>'
+    );
     const tabs = html.find('.tabs[data-group="primary"]');
     tabs.prepend(actionsTabButton);
 
