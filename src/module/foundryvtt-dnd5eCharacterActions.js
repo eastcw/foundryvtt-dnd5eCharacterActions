@@ -97,7 +97,7 @@ Hooks.once('init', async function () {
   registerSettings();
 
   // Preload Handlebars templates
-  await loadTemplates(Object.values(flattenObject(TEMPLATES)));
+  await loadTemplates(Object.values(foundry.utils.flattenObject(TEMPLATES)));
   const characterActionsModuleData = getGame().modules.get(MODULE_ID);
   if (characterActionsModuleData) {
     characterActionsModuleData.api = {
